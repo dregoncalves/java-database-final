@@ -70,5 +70,16 @@ public class Customer {
     public void setOrders(List<OrderDetails> orders) {
         this.orders = orders;
     }
+
+    public Customer(long id, String name, String email, String phone, List<OrderDetails> orders) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.orders = orders;
+    }
+
+    public Customer() {
+    }
 }
 
