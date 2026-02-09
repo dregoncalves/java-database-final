@@ -4,6 +4,7 @@ import com.project.code.Model.Customer;
 import com.project.code.Model.Review;
 import com.project.code.Repo.CustomerRepository;
 import com.project.code.Repo.ReviewRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +33,7 @@ public class ReviewController {
             reviewMap.put("comment", review.getComment());
             reviewMap.put("rating", review.getRating());
 
-            Customer customer = customerRepository.findById(review.getCustomerId());
+            Customer customer = customerRepository.findById(review.getCustomerId()).orElseThrow(() -> new EntityNotFoundException());;
             if (customer != null) {
                 reviewMap.put("customerName", customer.getName());
             }

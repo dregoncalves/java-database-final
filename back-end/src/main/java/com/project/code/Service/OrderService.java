@@ -2,6 +2,7 @@ package com.project.code.Service;
 
 import com.project.code.Model.*;
 import com.project.code.Repo.*;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +37,7 @@ public class OrderService {
             customer = customerRepository.save(newCustomer);
         }
 
-        Store store = storeRepository.findById(placeOrderRequest.getStoreId());
+        Store store = storeRepository.findById(placeOrderRequest.getStoreId()).orElseThrow(EntityNotFoundException::new);;
         if (store == null) {
             throw new RuntimeException("Loja não encontrada");
         }
